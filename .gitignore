@@ -7,6 +7,7 @@ yarn-error.log*
 
 target
 
+*.iml
 .idea
 .idea/vcs.xml
 
