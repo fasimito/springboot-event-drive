@@ -36,6 +36,20 @@
     from user_transfer
     where ID = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="getAllUsersByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_transfer
+  </select>
+
+  <select id="getTransfersPageByUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user_transfer
+    where PAYER = #{payer,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     <!--
       WARNING - @mbggenerated

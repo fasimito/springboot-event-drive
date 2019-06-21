@@ -1,9 +1,9 @@
 server:
-  port: 9090
+  port: 8080
 spring:
   datasource:
-    name: test
-    url: jdbc:mysql://192.168.116.131:3306/aws-assignment
+    name: aws-assignment
+    url: jdbc:mysql://localhost:3306/aws-assignment
     username: root
     password: 123456
     # 使用druid数据源
@@ -22,23 +22,6 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20f
-  kafka:
-    bootstrap-servers: 192.168.116.132:9092,192.168.116.133:9092,192.168.116.135:9098
-    producer:
-      retries: 0
-      batch-size: 12800
-      buffer-memory: 102400
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      group-id: kafka-consumer-group
-      auto-offset-reset: earliest
-      enable-auto-commit: true
-      auto-commit-interval: 20000
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    listener:
-      concurrency: 3
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml
@@ -50,6 +33,6 @@ pagehelper:
     supportMethodsArguments: true
     params: count=countSql
 
-defined:
-    kafka:
-        topic: Test-Springboot-Topic
+logging:
+  level:
+     com.events.mapper: debug
