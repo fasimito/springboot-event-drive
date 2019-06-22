@@ -43,13 +43,19 @@ public class UserTransferController {
     @RequestMapping(value ="/users", method= RequestMethod.GET)
     @ApiOperation(value="Generate short URL from the original long URL and store into database", notes="short url is right, it could return")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "account", value = "account", required = true, dataType = "String")
+            @ApiImplicitParam(paramType="query", name = "account", value = "account", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "pageNo", value = "pageNo", required = true, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "pageSize", required = true, dataType = "int")
     })
-    public String getUserTransfers(@RequestParam String account){
-        logger.info("account={} ", account);
-        List<UserTransfer> users = userTransferService.getTransferByUserPages(account,2,2);
+    public String getUserTransfers(
+            @RequestParam String account,
+            @RequestParam int pageNo,
+            @RequestParam int pageSize
+    ){
+        logger.info("account={} , pageNo = {}, pageSize = {}", account,pageNo,pageSize);
+        List<UserTransfer> users = userTransferService.getTransferByUserPages(account,pageNo,pageSize);
         users.forEach(p->{
-            System.out.println("User is: "+p.getPayer());
+            System.out.println("User is: "+p.getPayer()+" id= "+ p.getId());
         });
         return "";
     }
