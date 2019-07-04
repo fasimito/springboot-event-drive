@@ -1,5 +1,6 @@
 package com.events.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.events.domain.UserTransfer;
 import com.events.service.UserTransferService;
 import io.swagger.annotations.Api;
@@ -34,12 +35,15 @@ public class UserTransferController {
             @RequestParam int pageNo,
             @RequestParam int pageSize
     ){
+        String results = "";
         logger.info("pageNo={}, and pageSize = {}", pageNo, pageSize);
         List<UserTransfer> users = userTransferService.getUserByPages(pageNo, pageSize);
         users.forEach(p->{
             System.out.println("User is: "+p.getPayer()+" id="+p.getId());
         });
-        return "";
+        results = JSONObject.toJSONString(users);
+        System.out.println(results);
+        return results;
     }
 
     @ResponseBody
